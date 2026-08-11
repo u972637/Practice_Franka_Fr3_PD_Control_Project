@@ -20,8 +20,8 @@ bool button_left = false, button_right = false;
 
 // --- 제어 게인 (안정성 중심) ---
 // 이 수식에서는 k_p가 스프링 상수, k_d가 댐핑 상수 역할을 합니다.
-double k_p = 220.0; 
-double k_d = 5.0;  
+double k_p = 800.0; //500
+double k_d = 8.5;  //5
 
 // --- 키보드/마우스 콜백 (이전과 동일) ---
 void keyboard(GLFWwindow* window, int key, int scancode, int act, int mods) {
