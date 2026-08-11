@@ -31,8 +31,38 @@ MuJoCo 3.4.0은 `mujoco-3.4.0/`에 이미 포함되어 있어 별도 설치가 �
 
 ### 사전 요구사항
 
-- ROS 2 Humble ([설치 가이드](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html))
+- ROS 2 Humble (아래에서 설치)
 - MoveIt 2 (아래 rosdep 단계에서 함께 설치됨)
+
+#### ROS 2 Humble 설치 (Ubuntu 22.04, Debian 패키지)
+
+공식 가이드: https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html
+
+```bash
+# 1. UTF-8 로케일 확인 (보통 기본 설정되어 있음)
+locale  # LANG=en_US.UTF-8 등으로 나오면 통과
+
+# 2. ROS 2 apt 저장소 등록
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+sudo apt update && sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+
+# 3. 설치
+sudo apt update
+sudo apt upgrade
+sudo apt install ros-humble-ros-base ros-dev-tools
+
+# 4. rosdep 초기화 (최초 1회)
+sudo rosdep init
+rosdep update
+
+# 5. 매 셸마다 자동 소싱하고 싶다면 (선택)
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+```
+
+`ros-humble-ros-base`는 최소 구성(RViz 등 GUI 도구 제외)이고, `ros-dev-tools`가 `colcon`, `rosdep` 등 빌드 도구를 포함합니다. MoveIt 2 자체는 여기서 설치하지 않고, 아래 `rosdep install` 단계에서 `franka_ik_bridge/package.xml`에 선언된 대로 자동 설치됩니다.
 
 ### 워크스페이스 준비
 
