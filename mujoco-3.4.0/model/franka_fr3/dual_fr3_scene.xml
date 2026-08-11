@@ -1,0 +1,14 @@
+<mujoco model="dual_franka_fr3">
+  <compiler angle="radian" meshdir="assets"/>
+  <option integrator="implicitfast" timestep="0.002"/>
+  <statistic center="0 0 0.4" extent="1.5"/>
+
+  <include file="fr3.xml"/>
+  <include file="fr3_2.xml"/>
+
+  <worldbody>
+    <light pos="0 0 2" dir="0 0 -1" diffuse="1 1 1"/>
+    <geom name="floor" size="0 0 .05" type="plane" rgba=".2 .3 .4 1" condim="3"/>
+    
+    </worldbody>
+</mujoco>

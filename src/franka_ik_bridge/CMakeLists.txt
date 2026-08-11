@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.22)
 project(franka_ik_bridge)
 
-# 1. 환경 설정: MuJoCo 설치 경로 (버전 숫자 주의: 3.4.0 확인)
-set(MUJOCO_DIR /home/leejoonhyoung/mujoco-3.4.0)
+# 1. 환경 설정: MuJoCo 설치 경로 (워크스페이스 내부에 동봉, 버전 숫자 주의: 3.4.0 확인)
+set(MUJOCO_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../mujoco-3.4.0)
 
 # 2. 의존성 패키지 찾기
 find_package(ament_cmake REQUIRED)
